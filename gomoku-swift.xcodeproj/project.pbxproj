@@ -1,0 +1,497 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CF25610E1FD9388A0059588B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25610D1FD9388A0059588B /* AppDelegate.swift */; };
+		CF2561101FD9388A0059588B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25610F1FD9388A0059588B /* ViewController.swift */; };
+		CF2561131FD9388A0059588B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2561111FD9388A0059588B /* Main.storyboard */; };
+		CF2561151FD9388A0059588B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2561141FD9388A0059588B /* Assets.xcassets */; };
+		CF2561181FD9388A0059588B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2561161FD9388A0059588B /* LaunchScreen.storyboard */; };
+		CF2561231FD9388A0059588B /* gomoku_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561221FD9388A0059588B /* gomoku_swiftTests.swift */; };
+		CF2561311FD938E90059588B /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561301FD938E90059588B /* AI.swift */; };
+		CF2561331FD939040059588B /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561321FD939040059588B /* GameBoard.swift */; };
+		CF2561351FD9390E0059588B /* BoardSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561341FD9390E0059588B /* BoardSquare.swift */; };
+		CF2561381FD9392A0059588B /* GameBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561361FD9392A0059588B /* GameBoardViewController.swift */; };
+		CF2561391FD9392A0059588B /* GameBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2561371FD9392A0059588B /* GameBoardViewController.xib */; };
+		CF25613B1FD939520059588B /* BoardSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25613A1FD939520059588B /* BoardSquareView.swift */; };
+		CF25613D1FD939600059588B /* BoardSquareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF25613C1FD939600059588B /* BoardSquareView.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CF25611F1FD9388A0059588B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CF2561021FD9388A0059588B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF2561091FD9388A0059588B;
+			remoteInfo = "gomoku-swift";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CF25610A1FD9388A0059588B /* gomoku-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gomoku-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF25610D1FD9388A0059588B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CF25610F1FD9388A0059588B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CF2561121FD9388A0059588B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CF2561141FD9388A0059588B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CF2561171FD9388A0059588B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CF2561191FD9388A0059588B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF25611E1FD9388A0059588B /* gomoku-swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gomoku-swiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF2561221FD9388A0059588B /* gomoku_swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gomoku_swiftTests.swift; sourceTree = "<group>"; };
+		CF2561241FD9388A0059588B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF2561301FD938E90059588B /* AI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
+		CF2561321FD939040059588B /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
+		CF2561341FD9390E0059588B /* BoardSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSquare.swift; sourceTree = "<group>"; };
+		CF2561361FD9392A0059588B /* GameBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardViewController.swift; sourceTree = "<group>"; };
+		CF2561371FD9392A0059588B /* GameBoardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameBoardViewController.xib; sourceTree = "<group>"; };
+		CF25613A1FD939520059588B /* BoardSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSquareView.swift; sourceTree = "<group>"; };
+		CF25613C1FD939600059588B /* BoardSquareView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoardSquareView.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CF2561071FD9388A0059588B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF25611B1FD9388A0059588B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CF2561011FD9388A0059588B = {
+			isa = PBXGroup;
+			children = (
+				CF25610C1FD9388A0059588B /* gomoku-swift */,
+				CF2561211FD9388A0059588B /* gomoku-swiftTests */,
+				CF25610B1FD9388A0059588B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CF25610B1FD9388A0059588B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF25610A1FD9388A0059588B /* gomoku-swift.app */,
+				CF25611E1FD9388A0059588B /* gomoku-swiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF25610C1FD9388A0059588B /* gomoku-swift */ = {
+			isa = PBXGroup;
+			children = (
+				CF25612D1FD938B10059588B /* Models */,
+				CF25612E1FD938B60059588B /* Views */,
+				CF25612F1FD938BE0059588B /* Controllers */,
+				CF25610D1FD9388A0059588B /* AppDelegate.swift */,
+				CF2561111FD9388A0059588B /* Main.storyboard */,
+				CF2561141FD9388A0059588B /* Assets.xcassets */,
+				CF2561161FD9388A0059588B /* LaunchScreen.storyboard */,
+				CF2561191FD9388A0059588B /* Info.plist */,
+			);
+			path = "gomoku-swift";
+			sourceTree = "<group>";
+		};
+		CF2561211FD9388A0059588B /* gomoku-swiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				CF2561221FD9388A0059588B /* gomoku_swiftTests.swift */,
+				CF2561241FD9388A0059588B /* Info.plist */,
+			);
+			path = "gomoku-swiftTests";
+			sourceTree = "<group>";
+		};
+		CF25612D1FD938B10059588B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CF2561301FD938E90059588B /* AI.swift */,
+				CF2561321FD939040059588B /* GameBoard.swift */,
+				CF2561341FD9390E0059588B /* BoardSquare.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CF25612E1FD938B60059588B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CF25613A1FD939520059588B /* BoardSquareView.swift */,
+				CF25613C1FD939600059588B /* BoardSquareView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CF25612F1FD938BE0059588B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CF25610F1FD9388A0059588B /* ViewController.swift */,
+				CF2561361FD9392A0059588B /* GameBoardViewController.swift */,
+				CF2561371FD9392A0059588B /* GameBoardViewController.xib */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CF2561091FD9388A0059588B /* gomoku-swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF2561271FD9388A0059588B /* Build configuration list for PBXNativeTarget "gomoku-swift" */;
+			buildPhases = (
+				CF2561061FD9388A0059588B /* Sources */,
+				CF2561071FD9388A0059588B /* Frameworks */,
+				CF2561081FD9388A0059588B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "gomoku-swift";
+			productName = "gomoku-swift";
+			productReference = CF25610A1FD9388A0059588B /* gomoku-swift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CF25611D1FD9388A0059588B /* gomoku-swiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF25612A1FD9388A0059588B /* Build configuration list for PBXNativeTarget "gomoku-swiftTests" */;
+			buildPhases = (
+				CF25611A1FD9388A0059588B /* Sources */,
+				CF25611B1FD9388A0059588B /* Frameworks */,
+				CF25611C1FD9388A0059588B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF2561201FD9388A0059588B /* PBXTargetDependency */,
+			);
+			name = "gomoku-swiftTests";
+			productName = "gomoku-swiftTests";
+			productReference = CF25611E1FD9388A0059588B /* gomoku-swiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CF2561021FD9388A0059588B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = "Colin Cowles";
+				TargetAttributes = {
+					CF2561091FD9388A0059588B = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					CF25611D1FD9388A0059588B = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = CF2561091FD9388A0059588B;
+					};
+				};
+			};
+			buildConfigurationList = CF2561051FD9388A0059588B /* Build configuration list for PBXProject "gomoku-swift" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF2561011FD9388A0059588B;
+			productRefGroup = CF25610B1FD9388A0059588B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CF2561091FD9388A0059588B /* gomoku-swift */,
+				CF25611D1FD9388A0059588B /* gomoku-swiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CF2561081FD9388A0059588B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF2561181FD9388A0059588B /* LaunchScreen.storyboard in Resources */,
+				CF25613D1FD939600059588B /* BoardSquareView.xib in Resources */,
+				CF2561391FD9392A0059588B /* GameBoardViewController.xib in Resources */,
+				CF2561151FD9388A0059588B /* Assets.xcassets in Resources */,
+				CF2561131FD9388A0059588B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF25611C1FD9388A0059588B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CF2561061FD9388A0059588B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF2561331FD939040059588B /* GameBoard.swift in Sources */,
+				CF2561101FD9388A0059588B /* ViewController.swift in Sources */,
+				CF25610E1FD9388A0059588B /* AppDelegate.swift in Sources */,
+				CF2561311FD938E90059588B /* AI.swift in Sources */,
+				CF2561351FD9390E0059588B /* BoardSquare.swift in Sources */,
+				CF2561381FD9392A0059588B /* GameBoardViewController.swift in Sources */,
+				CF25613B1FD939520059588B /* BoardSquareView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF25611A1FD9388A0059588B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF2561231FD9388A0059588B /* gomoku_swiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CF2561201FD9388A0059588B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF2561091FD9388A0059588B /* gomoku-swift */;
+			targetProxy = CF25611F1FD9388A0059588B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CF2561111FD9388A0059588B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF2561121FD9388A0059588B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CF2561161FD9388A0059588B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF2561171FD9388A0059588B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CF2561251FD9388A0059588B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CF2561261FD9388A0059588B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CF2561281FD9388A0059588B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "gomoku-swift/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "acriter.gomoku-swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CF2561291FD9388A0059588B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "gomoku-swift/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "acriter.gomoku-swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CF25612B1FD9388A0059588B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "gomoku-swiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "acriter.gomoku-swiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gomoku-swift.app/gomoku-swift";
+			};
+			name = Debug;
+		};
+		CF25612C1FD9388A0059588B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "gomoku-swiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "acriter.gomoku-swiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gomoku-swift.app/gomoku-swift";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CF2561051FD9388A0059588B /* Build configuration list for PBXProject "gomoku-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF2561251FD9388A0059588B /* Debug */,
+				CF2561261FD9388A0059588B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF2561271FD9388A0059588B /* Build configuration list for PBXNativeTarget "gomoku-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF2561281FD9388A0059588B /* Debug */,
+				CF2561291FD9388A0059588B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF25612A1FD9388A0059588B /* Build configuration list for PBXNativeTarget "gomoku-swiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF25612B1FD9388A0059588B /* Debug */,
+				CF25612C1FD9388A0059588B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CF2561021FD9388A0059588B /* Project object */;
+}
