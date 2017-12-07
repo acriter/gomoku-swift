@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CF25610E1FD9388A0059588B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25610D1FD9388A0059588B /* AppDelegate.swift */; };
-		CF2561101FD9388A0059588B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25610F1FD9388A0059588B /* ViewController.swift */; };
-		CF2561131FD9388A0059588B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2561111FD9388A0059588B /* Main.storyboard */; };
+		CF2561101FD9388A0059588B /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25610F1FD9388A0059588B /* MainScreenViewController.swift */; };
 		CF2561151FD9388A0059588B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2561141FD9388A0059588B /* Assets.xcassets */; };
 		CF2561181FD9388A0059588B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2561161FD9388A0059588B /* LaunchScreen.storyboard */; };
 		CF2561231FD9388A0059588B /* gomoku_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561221FD9388A0059588B /* gomoku_swiftTests.swift */; };
@@ -20,6 +19,9 @@
 		CF2561391FD9392A0059588B /* GameBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2561371FD9392A0059588B /* GameBoardViewController.xib */; };
 		CF25613B1FD939520059588B /* BoardSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25613A1FD939520059588B /* BoardSquareView.swift */; };
 		CF25613D1FD939600059588B /* BoardSquareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF25613C1FD939600059588B /* BoardSquareView.xib */; };
+		CF25613F1FD93DFB0059588B /* MainScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF25613E1FD93DFB0059588B /* MainScreenViewController.xib */; };
+		CF2561421FD968190059588B /* TitleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561401FD968190059588B /* TitleScreenViewController.swift */; };
+		CF2561431FD968190059588B /* TitleScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2561411FD968190059588B /* TitleScreenViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,8 +37,7 @@
 /* Begin PBXFileReference section */
 		CF25610A1FD9388A0059588B /* gomoku-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gomoku-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF25610D1FD9388A0059588B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CF25610F1FD9388A0059588B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CF2561121FD9388A0059588B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CF25610F1FD9388A0059588B /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		CF2561141FD9388A0059588B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF2561171FD9388A0059588B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF2561191FD9388A0059588B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -50,6 +51,9 @@
 		CF2561371FD9392A0059588B /* GameBoardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameBoardViewController.xib; sourceTree = "<group>"; };
 		CF25613A1FD939520059588B /* BoardSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSquareView.swift; sourceTree = "<group>"; };
 		CF25613C1FD939600059588B /* BoardSquareView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoardSquareView.xib; sourceTree = "<group>"; };
+		CF25613E1FD93DFB0059588B /* MainScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainScreenViewController.xib; sourceTree = "<group>"; };
+		CF2561401FD968190059588B /* TitleScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleScreenViewController.swift; sourceTree = "<group>"; };
+		CF2561411FD968190059588B /* TitleScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleScreenViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +99,6 @@
 				CF25612E1FD938B60059588B /* Views */,
 				CF25612F1FD938BE0059588B /* Controllers */,
 				CF25610D1FD9388A0059588B /* AppDelegate.swift */,
-				CF2561111FD9388A0059588B /* Main.storyboard */,
 				CF2561141FD9388A0059588B /* Assets.xcassets */,
 				CF2561161FD9388A0059588B /* LaunchScreen.storyboard */,
 				CF2561191FD9388A0059588B /* Info.plist */,
@@ -134,9 +137,12 @@
 		CF25612F1FD938BE0059588B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CF25610F1FD9388A0059588B /* ViewController.swift */,
+				CF25610F1FD9388A0059588B /* MainScreenViewController.swift */,
+				CF25613E1FD93DFB0059588B /* MainScreenViewController.xib */,
 				CF2561361FD9392A0059588B /* GameBoardViewController.swift */,
 				CF2561371FD9392A0059588B /* GameBoardViewController.xib */,
+				CF2561401FD968190059588B /* TitleScreenViewController.swift */,
+				CF2561411FD968190059588B /* TitleScreenViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -225,10 +231,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF2561181FD9388A0059588B /* LaunchScreen.storyboard in Resources */,
+				CF2561431FD968190059588B /* TitleScreenViewController.xib in Resources */,
 				CF25613D1FD939600059588B /* BoardSquareView.xib in Resources */,
 				CF2561391FD9392A0059588B /* GameBoardViewController.xib in Resources */,
 				CF2561151FD9388A0059588B /* Assets.xcassets in Resources */,
-				CF2561131FD9388A0059588B /* Main.storyboard in Resources */,
+				CF25613F1FD93DFB0059588B /* MainScreenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,8 +254,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF2561331FD939040059588B /* GameBoard.swift in Sources */,
-				CF2561101FD9388A0059588B /* ViewController.swift in Sources */,
+				CF2561101FD9388A0059588B /* MainScreenViewController.swift in Sources */,
 				CF25610E1FD9388A0059588B /* AppDelegate.swift in Sources */,
+				CF2561421FD968190059588B /* TitleScreenViewController.swift in Sources */,
 				CF2561311FD938E90059588B /* AI.swift in Sources */,
 				CF2561351FD9390E0059588B /* BoardSquare.swift in Sources */,
 				CF2561381FD9392A0059588B /* GameBoardViewController.swift in Sources */,
@@ -275,14 +283,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CF2561111FD9388A0059588B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CF2561121FD9388A0059588B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CF2561161FD9388A0059588B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainScreenViewController.swift
 //  gomoku-swift
 //
 //  Created by Colin Cowles on 12/7/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
