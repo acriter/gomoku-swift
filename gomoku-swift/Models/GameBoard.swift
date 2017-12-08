@@ -11,19 +11,25 @@ import UIKit
 class GameBoard: NSObject {
     var width: Int
     var height: Int
-    var squares: Array<[BoardSquare]>
+    var squares: [[BoardSquare]]
     init(width: Int, height: Int) {
         self.width = width
         self.height = height
-        self.squares = Array(repeating: Array(repeating: BoardSquare(), count: width), count: height)
+        self.squares = [[BoardSquare]]()
+        for i in 0...self.height - 1 {
+            self.squares.append([BoardSquare]())
+            for _ in 0...self.width - 1 {
+                self.squares[i].append(BoardSquare())
+            }
+        }
         super.init()
     }
     
-    func squareForIndexPath(path: NSIndexPath) -> BoardSquare {
+    func squareForIndexPath(path: IndexPath) -> BoardSquare {
         return self.squareForRow(row: path.row, column: path.section)
     }
     
     func squareForRow(row: Int, column: Int) -> BoardSquare {
-        return self.squares[column][row]
+        return self.squares[row][column]
     }
 }

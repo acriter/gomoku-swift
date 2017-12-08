@@ -11,6 +11,9 @@ import UIKit
 @IBDesignable
 class BoardSquareView: UICollectionViewCell {
     
+    var colorView: UIView?
+    //var label: UILabel?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -22,16 +25,28 @@ class BoardSquareView: UICollectionViewCell {
     }
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing:BoardSquareView.self), owner: self, options: nil)
+        self.setUpCell(owner: .NoOne)
+        //Bundle.main.loadNibNamed(String(describing:BoardSquareView.self), owner: self, options: nil)
         //self.contentView.frame = self.bounds
         //self.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
+    
+    public func setUpCell(owner: BoardSquare.SquareOwner) {
         self.layer.borderWidth = 2.0
         self.layer.borderColor = UIColor.black.cgColor
         self.layer.cornerRadius = 5.0
-        self.changeToSquareType(type: .NoOne)
+        self.changeToSquareType(type: owner, instant: true)
+        
+        let v = UIView(frame: self.bounds)
+        self.contentView.addSubview(v)
+        self.colorView = v
+        
+        //let aLabel = UILabel(frame: self.bounds)
+        //self.contentView.addSubview(aLabel)
+        //self.label = aLabel
     }
     
-    public func changeToSquareType(type: BoardSquare.SquareOwner) {
+    public func changeToSquareType(type: BoardSquare.SquareOwner, instant: Bool) {
         var color = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         switch type {
         case .AI:
@@ -41,13 +56,12 @@ class BoardSquareView: UICollectionViewCell {
         case .NoOne:
             color = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }
-        
-        UIView.animate(withDuration: 1,
+        UIView.animate(withDuration: instant ? 0 : 1,
                        delay: 0,
                        usingSpringWithDamping: 1,
                        initialSpringVelocity: 0.5,
                        options: .curveEaseInOut, animations: {
-                        self.contentView.backgroundColor = color
+                        self.colorView?.backgroundColor = color
         }, completion: nil)
     }
 }

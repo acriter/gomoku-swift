@@ -63,8 +63,11 @@ class GameBoardViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let square: BoardSquare = gameBoard.squareForIndexPath(path: indexPath)
+        square.owner = .Human
+        
         if let cell = collectionView.cellForItem(at: indexPath) as? BoardSquareView {
-            cell.changeToSquareType(type: .Human)
+            cell.changeToSquareType(type: .Human, instant: false)
         }
         return
     }
@@ -83,6 +86,11 @@ class GameBoardViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BoardSquareView
+        
+        let square: BoardSquare = gameBoard.squareForIndexPath(path: indexPath)
+        //cell.label?.font = UIFont.boldSystemFont(ofSize: 10.0)
+        //cell.label?.text = "\(indexPath.section), \(indexPath.row)"
+        cell.setUpCell(owner: square.owner)
         return cell
     }
 }
