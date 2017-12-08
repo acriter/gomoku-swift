@@ -22,7 +22,7 @@ class GameBoardViewController: UICollectionViewController {
         self.gridHeight = gridHeight
         self.target = target
         self.gameBoard = GameBoard(width: gridWidth, height: gridHeight)
-        self.gameEngine = GameEngine(gameBoard: self.gameBoard)
+        self.gameEngine = GameEngine(gameBoard: self.gameBoard, target: self.target)
         super.init(nibName: String(describing: GameBoardViewController.self), bundle: nil)
     }
     
@@ -31,7 +31,7 @@ class GameBoardViewController: UICollectionViewController {
         self.gridHeight = 0
         self.target = 0
         self.gameBoard = GameBoard(width: 0, height: 0)
-        self.gameEngine = GameEngine(gameBoard: self.gameBoard)
+        self.gameEngine = GameEngine(gameBoard: self.gameBoard, target: self.target)
         assertionFailure("should only create GameBoardViewController with model info")
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,7 +41,7 @@ class GameBoardViewController: UICollectionViewController {
         self.gridHeight = 0
         self.target = 0
         self.gameBoard = GameBoard(width: 0, height: 0)
-        self.gameEngine = GameEngine(gameBoard: self.gameBoard)
+        self.gameEngine = GameEngine(gameBoard: self.gameBoard, target: self.target)
         assertionFailure("should only create GameBoardViewController with model info")
         super.init(coder: aDecoder)
     }
