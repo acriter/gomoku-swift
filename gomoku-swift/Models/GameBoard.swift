@@ -11,7 +11,7 @@ import UIKit
 class GameBoard: NSObject {
     let width: Int
     let height: Int
-    let squares: [[BoardSquare]]
+    private let squares: [[BoardSquare]]
     init(width: Int, height: Int) {
         self.width = width
         self.height = height
@@ -27,11 +27,19 @@ class GameBoard: NSObject {
         super.init()
     }
     
-    func squareForIndexPath(path: IndexPath) -> BoardSquare {
+    func setOwnerForIndexPath(owner: GameEngine.Player, path: IndexPath) {
+        self.squareForIndexPath(path: path).owner = owner
+    }
+    
+    func ownerForIndexPath(path: IndexPath) -> GameEngine.Player {
+        return self.squareForIndexPath(path: path).owner
+    }
+    
+    private func squareForIndexPath(path: IndexPath) -> BoardSquare {
         return self.squareForRow(row: path.row, column: path.section)
     }
     
-    func squareForRow(row: Int, column: Int) -> BoardSquare {
+    private func squareForRow(row: Int, column: Int) -> BoardSquare {
         return self.squares[row][column]
     }
 }

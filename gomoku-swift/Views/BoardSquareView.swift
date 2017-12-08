@@ -31,7 +31,7 @@ class BoardSquareView: UICollectionViewCell {
         //self.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
-    public func setUpCell(owner: BoardSquare.SquareOwner) {
+    public func setUpCell(owner: GameEngine.Player) {
         self.layer.borderWidth = 2.0
         self.layer.borderColor = UIColor.black.cgColor
         self.layer.cornerRadius = 5.0
@@ -46,7 +46,7 @@ class BoardSquareView: UICollectionViewCell {
         //self.label = aLabel
     }
     
-    public func changeToSquareType(type: BoardSquare.SquareOwner, instant: Bool) {
+    public func changeToSquareType(type: GameEngine.Player, instant: Bool) {
         var color = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         switch type {
         case .AI:

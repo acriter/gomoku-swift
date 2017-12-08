@@ -12,7 +12,6 @@
 		CF2561151FD9388A0059588B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2561141FD9388A0059588B /* Assets.xcassets */; };
 		CF2561181FD9388A0059588B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2561161FD9388A0059588B /* LaunchScreen.storyboard */; };
 		CF2561231FD9388A0059588B /* gomoku_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561221FD9388A0059588B /* gomoku_swiftTests.swift */; };
-		CF2561311FD938E90059588B /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561301FD938E90059588B /* AI.swift */; };
 		CF2561331FD939040059588B /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561321FD939040059588B /* GameBoard.swift */; };
 		CF2561351FD9390E0059588B /* BoardSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561341FD9390E0059588B /* BoardSquare.swift */; };
 		CF2561381FD9392A0059588B /* GameBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561361FD9392A0059588B /* GameBoardViewController.swift */; };
@@ -23,6 +22,7 @@
 		CF2561421FD968190059588B /* TitleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561401FD968190059588B /* TitleScreenViewController.swift */; };
 		CF2561431FD968190059588B /* TitleScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2561411FD968190059588B /* TitleScreenViewController.xib */; };
 		CF2561471FD9BAF60059588B /* BoardSquareViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561461FD9BAF60059588B /* BoardSquareViewLayout.swift */; };
+		CF2561491FDB24EB0059588B /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561481FDB24EB0059588B /* GameEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,6 @@
 		CF25611E1FD9388A0059588B /* gomoku-swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gomoku-swiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2561221FD9388A0059588B /* gomoku_swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gomoku_swiftTests.swift; sourceTree = "<group>"; };
 		CF2561241FD9388A0059588B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF2561301FD938E90059588B /* AI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
 		CF2561321FD939040059588B /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		CF2561341FD9390E0059588B /* BoardSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSquare.swift; sourceTree = "<group>"; };
 		CF2561361FD9392A0059588B /* GameBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +55,7 @@
 		CF2561401FD968190059588B /* TitleScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleScreenViewController.swift; sourceTree = "<group>"; };
 		CF2561411FD968190059588B /* TitleScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleScreenViewController.xib; sourceTree = "<group>"; };
 		CF2561461FD9BAF60059588B /* BoardSquareViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardSquareViewLayout.swift; sourceTree = "<group>"; };
+		CF2561481FDB24EB0059588B /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +120,8 @@
 		CF25612D1FD938B10059588B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CF2561481FDB24EB0059588B /* GameEngine.swift */,
 				CF2561461FD9BAF60059588B /* BoardSquareViewLayout.swift */,
-				CF2561301FD938E90059588B /* AI.swift */,
 				CF2561321FD939040059588B /* GameBoard.swift */,
 				CF2561341FD9390E0059588B /* BoardSquare.swift */,
 			);
@@ -261,9 +261,9 @@
 				CF2561101FD9388A0059588B /* MainScreenViewController.swift in Sources */,
 				CF25610E1FD9388A0059588B /* AppDelegate.swift in Sources */,
 				CF2561421FD968190059588B /* TitleScreenViewController.swift in Sources */,
-				CF2561311FD938E90059588B /* AI.swift in Sources */,
 				CF2561351FD9390E0059588B /* BoardSquare.swift in Sources */,
 				CF2561381FD9392A0059588B /* GameBoardViewController.swift in Sources */,
+				CF2561491FDB24EB0059588B /* GameEngine.swift in Sources */,
 				CF25613B1FD939520059588B /* BoardSquareView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
