@@ -11,36 +11,41 @@ import UIKit
 class GameBoardViewController: UICollectionViewController {
     
     let reuseIdentifier = "customCell"
-    var sizeOfGrid: Int
+    var gridWidth: Int
+    var gridHeight: Int
     var target: Int
+    var gameBoard: GameBoard
     
-    init(gridSize: Int, target: Int) {
-        self.sizeOfGrid = gridSize
+    init(gridWidth: Int, gridHeight: Int, target: Int) {
+        self.gridWidth = gridWidth
+        self.gridHeight = gridHeight
         self.target = target
+        self.gameBoard = GameBoard(width: gridWidth, height: gridHeight)
         super.init(nibName: String(describing: GameBoardViewController.self), bundle: nil)
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        self.sizeOfGrid = 0
+        self.gridWidth = 0
+        self.gridHeight = 0
         self.target = 0
+        self.gameBoard = GameBoard(width: 0, height: 0)
         assertionFailure("should only create GameBoardViewController with model info")
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.sizeOfGrid = 0
+        self.gridWidth = 0
+        self.gridHeight = 0
         self.target = 0
+        self.gameBoard = GameBoard(width: 0, height: 0)
         assertionFailure("should only create GameBoardViewController with model info")
         super.init(coder: aDecoder)
-    }
-    
-    override func awakeFromNib() {
-        //collectionView?.register(BoardSquareView.classForCoder(), forCellWithReuseIdentifier: reuseIdentifier)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.register(BoardSquareView.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //collectionView?.register(UINib.init(nibName: String(describing: BoardSquareView.self), bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,15 +55,17 @@ class GameBoardViewController: UICollectionViewController {
     
     // MARK: - CollectionView functions
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sizeOfGrid
+        return gridWidth
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sizeOfGrid
+        return gridHeight
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("selected")
+        if let cell = collectionView.cellForItem(at: indexPath) as? BoardSquareView {
+            cell.changeToSquareType(type: .Human)
+        }
         return
     }
     
@@ -67,7 +74,6 @@ class GameBoardViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        print("highlighted")
         return
     }
     

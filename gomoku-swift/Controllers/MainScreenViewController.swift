@@ -13,11 +13,12 @@ class MainScreenViewController: UIViewController {
     @IBOutlet weak var sidebarView: UIView!
     
     var sidebarIsShowing = false
-    var sizeOfGrid = 3
+    var gridWidth = 10
+    var gridHeight = 5
     var target = 4
     
     private func setUpGameBoard() {
-        let gameBoardVC = GameBoardViewController(gridSize: sizeOfGrid, target: target)
+        let gameBoardVC = GameBoardViewController(gridWidth: gridWidth, gridHeight: gridHeight, target: target)
         addChildViewController(gameBoardVC)
         gameBoardVC.didMove(toParentViewController: self)
         

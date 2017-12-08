@@ -9,5 +9,11 @@
 import UIKit
 
 class BoardSquare: NSObject {
-
+    enum SquareOwner {
+        case NoOne, AI, Human
+    }
+    
+    var owner: SquareOwner = .NoOne
+    //allow multiple AI to play???
+    
 }

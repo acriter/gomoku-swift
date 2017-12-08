@@ -25,13 +25,13 @@ class BoardSquareViewLayout: UICollectionViewLayout {
                 let dimension = min(cellWidth, cellHeight)
                 self.cellWidth = dimension
                 self.cellHeight = dimension
-                self.contentSize = CGSize(width: dimension * Double(rowCount), height: dimension * Double(sectionCount))
+                self.contentSize = CGSize(width: dimension * Double(sectionCount), height: dimension * Double(rowCount))
                 for section in 0...sectionCount - 1 {
                     if let rowCount = collectionView?.numberOfItems(inSection: section), rowCount > 0 {
                         for item in 0...rowCount - 1 {
                             let cellIndex = IndexPath(item: item, section: section)
-                            let xPos = Double(item) * dimension
-                            let yPos = Double(section) * dimension
+                            let xPos = Double(section) * dimension
+                            let yPos = Double(item) * dimension
                             
                             let cellAttributes = UICollectionViewLayoutAttributes(forCellWith: cellIndex)
                             cellAttributes.frame = CGRect(x: xPos, y: yPos, width: dimension, height: dimension)
@@ -178,5 +178,4 @@ class BoardSquareViewLayout: UICollectionViewLayout {
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
-    
 }
