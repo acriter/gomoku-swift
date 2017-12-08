@@ -9,19 +9,21 @@
 import UIKit
 
 class GameBoard: NSObject {
-    var width: Int
-    var height: Int
-    var squares: [[BoardSquare]]
+    let width: Int
+    let height: Int
+    let squares: [[BoardSquare]]
     init(width: Int, height: Int) {
         self.width = width
         self.height = height
-        self.squares = [[BoardSquare]]()
+        var squareArr = [[BoardSquare]]()
         for i in 0...self.height - 1 {
-            self.squares.append([BoardSquare]())
+            squareArr.append([BoardSquare]())
             for _ in 0...self.width - 1 {
-                self.squares[i].append(BoardSquare())
+                squareArr[i].append(BoardSquare())
             }
         }
+        self.squares = squareArr
+        
         super.init()
     }
     
