@@ -13,7 +13,7 @@ class MainScreenViewController: UIViewController {
     @IBOutlet weak var sidebarView: UIView!
     
     var sidebarIsShowing = false
-    var sizeOfGrid = 6
+    var sizeOfGrid = 3
     var target = 4
     
     private func setUpGameBoard() {
@@ -46,7 +46,7 @@ class MainScreenViewController: UIViewController {
     // MARK: - sidebar functions
     
     private func toggleSidebar(hide: Bool, instant: Bool, completion: ((Bool) -> Void)?) {
-        let targetPosition = hide ? CGPoint(x: -sidebarView.frame.size.width, y: 0) : CGPoint(x: 0, y: 0)
+        let targetPosition = hide ? CGPoint(x: -sidebarView.frame.size.width, y: 0) : CGPoint(x: -5, y: 0)
         UIView.animate(withDuration: instant ? 0 : 0.5,
                        delay: 0,
                        usingSpringWithDamping: 0.8,

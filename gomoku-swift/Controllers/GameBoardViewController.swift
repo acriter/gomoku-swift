@@ -8,8 +8,9 @@
 
 import UIKit
 
-class GameBoardViewController: UIViewController {
+class GameBoardViewController: UICollectionViewController {
     
+    let reuseIdentifier = "customCell"
     var sizeOfGrid: Int
     var target: Int
     
@@ -33,13 +34,49 @@ class GameBoardViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
+    override func awakeFromNib() {
+        //collectionView?.register(BoardSquareView.classForCoder(), forCellWithReuseIdentifier: reuseIdentifier)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        collectionView?.register(BoardSquareView.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - CollectionView functions
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return sizeOfGrid
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return sizeOfGrid
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected")
+        return
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        return
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        print("highlighted")
+        return
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        return
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BoardSquareView
+        return cell
     }
 }

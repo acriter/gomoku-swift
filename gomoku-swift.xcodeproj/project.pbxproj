@@ -22,6 +22,7 @@
 		CF25613F1FD93DFB0059588B /* MainScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF25613E1FD93DFB0059588B /* MainScreenViewController.xib */; };
 		CF2561421FD968190059588B /* TitleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561401FD968190059588B /* TitleScreenViewController.swift */; };
 		CF2561431FD968190059588B /* TitleScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2561411FD968190059588B /* TitleScreenViewController.xib */; };
+		CF2561471FD9BAF60059588B /* BoardSquareViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561461FD9BAF60059588B /* BoardSquareViewLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		CF25613E1FD93DFB0059588B /* MainScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainScreenViewController.xib; sourceTree = "<group>"; };
 		CF2561401FD968190059588B /* TitleScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleScreenViewController.swift; sourceTree = "<group>"; };
 		CF2561411FD968190059588B /* TitleScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleScreenViewController.xib; sourceTree = "<group>"; };
+		CF2561461FD9BAF60059588B /* BoardSquareViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardSquareViewLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		CF25612D1FD938B10059588B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CF2561461FD9BAF60059588B /* BoardSquareViewLayout.swift */,
 				CF2561301FD938E90059588B /* AI.swift */,
 				CF2561321FD939040059588B /* GameBoard.swift */,
 				CF2561341FD9390E0059588B /* BoardSquare.swift */,
@@ -253,6 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF2561471FD9BAF60059588B /* BoardSquareViewLayout.swift in Sources */,
 				CF2561331FD939040059588B /* GameBoard.swift in Sources */,
 				CF2561101FD9388A0059588B /* MainScreenViewController.swift in Sources */,
 				CF25610E1FD9388A0059588B /* AppDelegate.swift in Sources */,
