@@ -230,7 +230,7 @@ class GameEngine: NSObject {
         if (x < gameBoard.width - 1) {
             var j = y + 1
             for i in x + 1...gameBoard.width - 1 {
-                if (j >= gameBoard.height - 1) {
+                if (j >= gameBoard.height) {
                     break
                 }
                 loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
@@ -286,7 +286,7 @@ class GameEngine: NSObject {
         if (x > 0) {
             var j = y + 1
             for i in (0...x - 1).reversed() {
-                if (j >= gameBoard.height - 1) {
+                if (j >= gameBoard.height) {
                     break
                 }
                 loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
@@ -378,7 +378,7 @@ class GameEngine: NSObject {
                     //don't auto-lose in tic-tac-toe :)
                     ret = (0, 0)
                 } else {
-                    ret = (width / 2, height / 2)
+                    ret = ((width / 2) + 1, (height / 2) + 1)
                 }
             }
         } else {
