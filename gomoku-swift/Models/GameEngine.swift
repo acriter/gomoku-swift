@@ -41,11 +41,217 @@ class GameEngine: NSObject {
     private var highestRowWithStone = Int.min
     private var lowestColumnWithStone = Int.max
     private var highestColumnWithStone = Int.min
-    private var friendlyStonesPlaced = 0;
+    private var friendlyStonesPlaced = 0
     
     
     func ScoreForMoveToSquareWithStatus(tuple: (Int, Int), player: GameEngine.Player) -> Scoring {
-        return Scoring(target: self.target)
+        let scoring = Scoring(target: target)
+        let x = tuple.0
+        let y = tuple.1
+        
+        var loopSquareStatus: GameEngine.Player = .NoOne
+        
+        //have we run into empty squares going in this direction? having consecutive pieces is much stronger
+        var emptiesOneSide = 0
+        var emptiesOtherSide = 0
+        var nearbyPieces = 0
+        var consecutivePieces = 1
+        
+        
+        let resetVars: () -> Void = {
+            emptiesOneSide = 0
+            emptiesOtherSide = 0
+            nearbyPieces = 0
+            consecutivePieces = 1
+        }
+        
+        //only return a number for these chains if there is room to make a winning play along that axis
+        
+        //check horizontally
+        for i in (0...x - 1).reversed() {
+            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, y))
+            if (loopSquareStatus == player && emptiesOneSide == 0) {
+                consecutivePieces += 1
+            } else if (emptiesOneSide < target / 2) {
+                if (loopSquareStatus == .NoOne) {
+                    emptiesOneSide += 1
+                } else if (loopSquareStatus == player) {
+                    nearbyPieces += 1
+                } else {
+                    break
+                }
+            } else {
+                break
+            }
+        }
+        
+        for i in x + 1...gameBoard.width - 1 {
+            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, y))
+            if (loopSquareStatus == player && emptiesOtherSide == 0) {
+                consecutivePieces += 1
+            } else if (emptiesOtherSide < target / 2) {
+                if (loopSquareStatus == .NoOne) {
+                    emptiesOtherSide += 1
+                } else if (loopSquareStatus == player) {
+                    nearbyPieces += 1
+                } else {
+                    break
+                }
+            } else {
+                break
+            }
+        }
+        
+        //is it possible to reach the target in this direction?
+        if (emptiesOneSide + emptiesOtherSide + nearbyPieces + consecutivePieces >= target) {
+            scoring.AddDirection(dir: .Horizontal, consecutive: consecutivePieces, nearbyBonus: nearbyPieces, bothSidesEmpty: emptiesOneSide > 0 && emptiesOtherSide > 0)
+        }
+        
+        resetVars()
+        
+        //check vertically
+        for i in (0...y - 1).reversed() {
+            loopSquareStatus = gameBoard.ownerForTuple(tuple: (x, i))
+            if (loopSquareStatus == player && emptiesOneSide == 0) {
+                consecutivePieces += 1
+            } else if (emptiesOneSide < target / 2) {
+                if (loopSquareStatus == .NoOne) {
+                    emptiesOneSide += 1
+                } else if (loopSquareStatus == player) {
+                    nearbyPieces += 1
+                } else {
+                    break
+                }
+            } else {
+                break
+            }
+        }
+        
+        for i in y + 1...gameBoard.height - 1 {
+            loopSquareStatus = gameBoard.ownerForTuple(tuple: (x, i))
+            if (loopSquareStatus == player && emptiesOtherSide == 0) {
+                consecutivePieces += 1
+            } else if (emptiesOtherSide < target / 2) {
+                if (loopSquareStatus == .NoOne) {
+                    emptiesOtherSide += 1
+                } else if (loopSquareStatus == player) {
+                    nearbyPieces += 1
+                } else {
+                    break
+                }
+            } else {
+                break
+            }
+        }
+        
+        if (emptiesOneSide + emptiesOtherSide + nearbyPieces + consecutivePieces >= target) {
+            scoring.AddDirection(dir: .Vertical, consecutive: consecutivePieces, nearbyBonus: nearbyPieces, bothSidesEmpty: emptiesOneSide > 0 && emptiesOtherSide > 0)
+        }
+        
+        resetVars()
+        
+        //check diagonally both ways
+        var j = y + 1
+        for i in x + 1...gameBoard.width - 1 {
+            if (j >= gameBoard.height) {
+                break
+            }
+            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
+            if (loopSquareStatus == player && emptiesOneSide == 0) {
+                consecutivePieces += 1
+            } else if (emptiesOneSide < target / 2) {
+                if (loopSquareStatus == .NoOne) {
+                    emptiesOneSide += 1
+                } else if (loopSquareStatus == player) {
+                    nearbyPieces += 1
+                } else {
+                    break
+                }
+            } else {
+                break
+            }
+            
+            j += 1
+        }
+        
+        j = y - 1
+        for i in (0...x - 1).reversed() {
+            if (j < 0) {
+                break
+            }
+            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
+            if (loopSquareStatus == player && emptiesOtherSide == 0) {
+                consecutivePieces += 1
+            } else if (emptiesOtherSide < target / 2) {
+                if (loopSquareStatus == .NoOne) {
+                    emptiesOtherSide += 1
+                } else if (loopSquareStatus == player) {
+                    nearbyPieces += 1
+                } else {
+                    break
+                }
+            } else {
+                break
+            }
+            
+            j -= 1
+        }
+        
+        if (emptiesOneSide + emptiesOtherSide + nearbyPieces + consecutivePieces >= target) {
+            scoring.AddDirection(dir: .DiagonalPos, consecutive: consecutivePieces, nearbyBonus: nearbyPieces, bothSidesEmpty: emptiesOneSide > 0 && emptiesOtherSide > 0)
+        }
+        
+        resetVars()
+        
+        j = y + 1
+        for i in (0...x - 1).reversed() {
+            if (j >= gameBoard.height) {
+                break
+            }
+            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
+            if (loopSquareStatus == player && emptiesOneSide == 0) {
+                consecutivePieces += 1
+            } else if (emptiesOneSide < target / 2) {
+                if (loopSquareStatus == .NoOne) {
+                    emptiesOneSide += 1
+                } else if (loopSquareStatus == player) {
+                    nearbyPieces += 1
+                } else {
+                    break
+                }
+            } else {
+                break
+            }
+            j += 1
+        }
+        
+        j = y - 1
+        for i in x + 1...gameBoard.width {
+            if (j < 0) {
+                break
+            }
+            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
+            if (loopSquareStatus == player && emptiesOtherSide == 0) {
+                consecutivePieces += 1
+            } else if (emptiesOtherSide < target / 2) {
+                if (loopSquareStatus == .NoOne) {
+                    emptiesOtherSide += 1
+                } else if (loopSquareStatus == player) {
+                    nearbyPieces += 1
+                } else {
+                    break
+                }
+            } else {
+                break
+            }
+            j -= 1
+        }
+        
+        if (emptiesOneSide + emptiesOtherSide + nearbyPieces + consecutivePieces >= target) {
+            scoring.AddDirection(dir: .DiagonalNeg, consecutive: consecutivePieces, nearbyBonus: nearbyPieces, bothSidesEmpty: emptiesOneSide > 0 && emptiesOtherSide > 0)
+        }
+        
+        return scoring
     }
     
     func BestMove() -> (Int, Int) {
@@ -80,7 +286,7 @@ class GameEngine: NSObject {
         if (self.friendlyStonesPlaced == 0) {
             /* Case 0 */
             let middle = boardSize / 2
-            var middleSquare1Owner = gameBoard.ownerForTuple(tuple: (middle, middle))
+            let middleSquare1Owner = gameBoard.ownerForTuple(tuple: (middle, middle))
             if (middleSquare1Owner == Player.NoOne) {
                 ret = (middle, middle)
             } else {
@@ -93,16 +299,16 @@ class GameEngine: NSObject {
             }
         } else {
             //prune outside squares
-            var minRow = max(0, self.lowestRowWithStone - 2)
-            var maxRow = min(boardSize - 1, self.highestRowWithStone + 2)
-            var minCol = max(0, self.lowestColumnWithStone - 2)
-            var maxCol = min(boardSize - 1, self.highestColumnWithStone + 2)
+            let minRow = max(0, self.lowestRowWithStone - 2)
+            let maxRow = min(boardSize - 1, self.highestRowWithStone + 2)
+            let minCol = max(0, self.lowestColumnWithStone - 2)
+            let maxCol = min(boardSize - 1, self.highestColumnWithStone + 2)
             
             var finished = false
             
             for i in minRow...maxRow where !finished {
                 for j in minCol...maxCol where !finished {
-                    var square = (i, j)
+                    let square = (i, j)
                     if (gameBoard.ownerForTuple(tuple: square) != .NoOne) {
                         continue
                     }
@@ -197,16 +403,16 @@ class GameEngine: NSObject {
         let y = tuple.1
         //possible for both of each pair to be true, but only for the first piece
         if (self.highestRowWithStone < x) {
-            self.highestRowWithStone = x;
+            self.highestRowWithStone = x
         }
         if (self.lowestRowWithStone > x) {
-            self.lowestRowWithStone = x;
+            self.lowestRowWithStone = x
         }
         if (self.highestColumnWithStone < y) {
-            self.highestColumnWithStone = y;
+            self.highestColumnWithStone = y
         }
         if (self.lowestColumnWithStone > y) {
-            self.lowestColumnWithStone = y;
+            self.lowestColumnWithStone = y
         }
     }
 }
@@ -220,13 +426,13 @@ class Scoring : NSObject {
     let target: Int
     
     //how many in a row are there with self move?
-    var horiz, vert, diagPos, diagNeg: Int
+    var horiz = 0, vert = 0, diagPos = 0, diagNeg = 0
     
     //how many friendly pieces were found nearby (with no more than a couple gaps in the middle)?
-    var horizNearbyBonus, vertNearbyBonus, diagPosNearbyBonus, diagNegNearbyBonus: Int
+    var horizNearbyBonus = 0, vertNearbyBonus = 0, diagPosNearbyBonus = 0, diagNegNearbyBonus = 0
     
     //are there some empty squares on both sides?
-    var horizBothSidesEmpty, vertBothSidesEmpty, diagPosBothSidesEmpty, diagNegBothSidesEmpty: Bool
+    var horizBothSidesEmpty = false, vertBothSidesEmpty = false, diagPosBothSidesEmpty = false, diagNegBothSidesEmpty = false
     
     init(target: Int) {
         self.target = target
