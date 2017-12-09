@@ -27,8 +27,8 @@ class GameBoard: NSObject {
         super.init()
     }
     
-    func setOwnerForIndexPath(owner: GameEngine.Player, path: IndexPath) {
-        self.squareForIndexPath(path: path).owner = owner
+    func setOwnerForSquare(tuple: (Int, Int), owner: GameEngine.Player) {
+        self.squareForRow(row: tuple.0, column: tuple.1).owner = owner
     }
     
     func ownerForIndexPath(path: IndexPath) -> GameEngine.Player {

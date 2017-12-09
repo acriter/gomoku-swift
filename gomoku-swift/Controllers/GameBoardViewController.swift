@@ -67,12 +67,14 @@ class GameBoardViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        gameBoard.setOwnerForIndexPath(owner: .Human, path: indexPath)
+        if (self.gameEngine.playerCanMove()) {
+            print("should work")
+            self.gameEngine.makeMoveToSquare(tuple: (indexPath.row, indexPath.section))
         
-        if let cell = collectionView.cellForItem(at: indexPath) as? BoardSquareView {
-            cell.changeToSquareType(type: .Human, instant: false)
+            if let cell = collectionView.cellForItem(at: indexPath) as? BoardSquareView {
+                cell.changeToSquareType(type: .Human, instant: false)
+            }
         }
-        return
     }
     
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

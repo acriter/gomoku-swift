@@ -8,28 +8,52 @@
 
 import UIKit
 
+protocol GameUpdateDelegate {
+    func AIMovedToSquare(tuple: (Int, Int))
+}
+
 class GameEngine: NSObject {
     enum Player {
         case NoOne, AI, Human
     }
     
-    let target: Int
-    let gameBoard: GameBoard
-    let scoring: Scoring
-    var currentPlayer: GameEngine.Player
+    private let target: Int
+    private let gameBoard: GameBoard
+    private let scoring: Scoring
+    private var currentPlayer: GameEngine.Player
+    var gameUpdateDelegate: GameUpdateDelegate?
     
     init(gameBoard: GameBoard, target: Int) {
         self.gameBoard = gameBoard
         self.target = target
         self.scoring = Scoring(target: target)
-        self.currentPlayer = .NoOne
+        self.currentPlayer = .Human
         super.init()
+    }
+    
+    public func playerCanMove() -> Bool {
+        print("current player: \(self.currentPlayer)")
+        if (self.currentPlayer == .Human) {
+            return true;
+        }
+    
+        return false;
+    }
+    
+    public func makeMoveToSquare(tuple: (Int, Int)) {
+        gameBoard.setOwnerForSquare(tuple: tuple, owner: self.currentPlayer)
+        self.checkForGameOver()
+        self.advancePlayer()
+    }
+    
+    private func checkForGameOver() {
+        print("game is over!")
+        //to fill in
     }
     
     private func advancePlayer() {
         if (self.currentPlayer == .NoOne) {
-            //who should go first? not sure
-            self.currentPlayer = .Human
+            print("current player should never be no one")
         } else if (self.currentPlayer == .Human) {
             self.currentPlayer = .AI
         } else if (self.currentPlayer == .AI) {
