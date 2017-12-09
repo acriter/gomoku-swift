@@ -35,6 +35,10 @@ class GameBoard: NSObject {
         return self.squareForIndexPath(path: path).owner
     }
     
+    func ownerForTuple(tuple: (Int, Int)) -> GameEngine.Player {
+        return self.ownerForIndexPath(path: IndexPath(row: tuple.0, section: tuple.1))
+    }
+    
     private func squareForIndexPath(path: IndexPath) -> BoardSquare {
         return self.squareForRow(row: path.row, column: path.section)
     }
