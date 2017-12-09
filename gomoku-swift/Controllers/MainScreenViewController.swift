@@ -14,8 +14,8 @@ class MainScreenViewController: UIViewController {
     
     var sidebarIsShowing = false
     var gridWidth = 10
-    var gridHeight = 5
-    var target = 4
+    var gridHeight = 10
+    var target = 5
     
     private func setUpGameBoard() {
         let gameBoardVC = GameBoardViewController(gridWidth: gridWidth, gridHeight: gridHeight, target: target)

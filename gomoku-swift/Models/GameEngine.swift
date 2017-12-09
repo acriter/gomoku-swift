@@ -370,11 +370,11 @@ class GameEngine: NSObject {
         let height = self.gameBoard.height
         if (self.friendlyStonesPlaced == 0) {
             /* Case 0 */
-            //there is a trap here to win every time:
+            //there is a trap here to win every time in a 4-length game:
             // start just to the left of center,
             // then play up diagonally to the left,
             // then play up diagonally to the right of the first play
-            // not sure how best to fix...
+            // TODO: fix by always starting diagonally opposed to the human
             let middleSquare1Owner = gameBoard.ownerForTuple(tuple: (width / 2, height / 2))
             if (middleSquare1Owner == Player.NoOne) {
                 ret = (width / 2, height / 2)
