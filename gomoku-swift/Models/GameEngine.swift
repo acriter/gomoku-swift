@@ -10,6 +10,7 @@ import UIKit
 
 protocol GameUpdateDelegate {
     func AIMovedToSquare(tuple: (Int, Int))
+    func gameEnded()
 }
 
 class GameEngine: NSObject {
@@ -21,6 +22,9 @@ class GameEngine: NSObject {
     private let gameBoard: GameBoard
     private let scoring: Scoring
     private var currentPlayer: GameEngine.Player
+    private var numberOfMoves = 0
+    private var isGameOver = false
+    public var winner: GameEngine.Player?
     var gameUpdateDelegate: GameUpdateDelegate?
     
     init(gameBoard: GameBoard, target: Int) {
@@ -36,19 +40,59 @@ class GameEngine: NSObject {
         if (self.currentPlayer == .Human) {
             return true;
         }
-    
+        
         return false;
     }
     
-    public func makeMoveToSquare(tuple: (Int, Int)) {
+    public func makePlayerMoveToSquare(tuple: (Int, Int)) {
+        //TODO: refactor to get rid of duplication
+        let humanMoveWinsGame = self.ScoreForMoveToSquareWithStatus(tuple: tuple, player: self.currentPlayer).MoveWins();
         gameBoard.setOwnerForSquare(tuple: tuple, owner: self.currentPlayer)
-        self.checkForGameOver()
-        self.advancePlayer()
+        self.UpdateSearchBoundsForPlayedSquare(tuple: tuple)
+        self.numberOfMoves += 1
+        if (humanMoveWinsGame) {
+            self.winner = self.currentPlayer
+            self.gameUpdateDelegate?.gameEnded()
+        } else if (self.numberOfMoves == self.gameBoard.height * self.gameBoard.width) {
+            self.winner = .NoOne
+            self.gameUpdateDelegate?.gameEnded()
+        } else {
+            self.checkForGameOver()
+            self.advancePlayer()
+            
+            //fix
+            if (self.currentPlayer == .AI) {
+                //make move
+                let bestMove = self.BestMove()
+                let aiMoveWinsGame = self.ScoreForMoveToSquareWithStatus(tuple: bestMove, player: self.currentPlayer).MoveWins();
+                gameBoard.setOwnerForSquare(tuple: bestMove, owner: self.currentPlayer)
+                self.UpdateSearchBoundsForPlayedSquare(tuple: bestMove)
+                self.numberOfMoves += 1
+                self.gameUpdateDelegate?.AIMovedToSquare(tuple: bestMove)
+                if (aiMoveWinsGame) {
+                    self.winner = self.currentPlayer
+                    self.gameUpdateDelegate?.gameEnded()
+                } else if (self.numberOfMoves == self.gameBoard.height * self.gameBoard.width) {
+                    self.winner = .NoOne
+                    self.gameUpdateDelegate?.gameEnded()
+                } else {
+                    self.checkForGameOver()
+                    self.advancePlayer()
+                }
+            }
+        }
+    }
+    
+    private func MoveWinsForSquareAndPlayer(tuple: (Int, Int), player: GameEngine.Player) -> Bool {
+        return self.ScoreForMoveToSquareWithStatus(tuple: tuple, player: player).MoveWins();
     }
     
     private func checkForGameOver() {
-        print("game is over!")
         //to fill in
+        print("game is over!")
+        if (self.numberOfMoves == self.gameBoard.width * self.gameBoard.height) {
+            print("tie")
+        }
     }
     
     private func advancePlayer() {
@@ -92,37 +136,41 @@ class GameEngine: NSObject {
         //only return a number for these chains if there is room to make a winning play along that axis
         
         //check horizontally
-        for i in (0...x - 1).reversed() {
-            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, y))
-            if (loopSquareStatus == player && emptiesOneSide == 0) {
-                consecutivePieces += 1
-            } else if (emptiesOneSide < target / 2) {
-                if (loopSquareStatus == .NoOne) {
-                    emptiesOneSide += 1
-                } else if (loopSquareStatus == player) {
-                    nearbyPieces += 1
+        if (x > 0) {
+            for i in (0...x - 1).reversed() {
+                loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, y))
+                if (loopSquareStatus == player && emptiesOneSide == 0) {
+                    consecutivePieces += 1
+                } else if (emptiesOneSide < target / 2) {
+                    if (loopSquareStatus == .NoOne) {
+                        emptiesOneSide += 1
+                    } else if (loopSquareStatus == player) {
+                        nearbyPieces += 1
+                    } else {
+                        break
+                    }
                 } else {
                     break
                 }
-            } else {
-                break
             }
         }
         
-        for i in x + 1...gameBoard.width - 1 {
-            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, y))
-            if (loopSquareStatus == player && emptiesOtherSide == 0) {
-                consecutivePieces += 1
-            } else if (emptiesOtherSide < target / 2) {
-                if (loopSquareStatus == .NoOne) {
-                    emptiesOtherSide += 1
-                } else if (loopSquareStatus == player) {
-                    nearbyPieces += 1
+        if (x < gameBoard.width - 1) {
+            for i in x + 1...gameBoard.width - 1 {
+                loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, y))
+                if (loopSquareStatus == player && emptiesOtherSide == 0) {
+                    consecutivePieces += 1
+                } else if (emptiesOtherSide < target / 2) {
+                    if (loopSquareStatus == .NoOne) {
+                        emptiesOtherSide += 1
+                    } else if (loopSquareStatus == player) {
+                        nearbyPieces += 1
+                    } else {
+                        break
+                    }
                 } else {
                     break
                 }
-            } else {
-                break
             }
         }
         
@@ -134,37 +182,41 @@ class GameEngine: NSObject {
         resetVars()
         
         //check vertically
-        for i in (0...y - 1).reversed() {
-            loopSquareStatus = gameBoard.ownerForTuple(tuple: (x, i))
-            if (loopSquareStatus == player && emptiesOneSide == 0) {
-                consecutivePieces += 1
-            } else if (emptiesOneSide < target / 2) {
-                if (loopSquareStatus == .NoOne) {
-                    emptiesOneSide += 1
-                } else if (loopSquareStatus == player) {
-                    nearbyPieces += 1
+        if (y > 0) {
+            for i in (0...y - 1).reversed() {
+                loopSquareStatus = gameBoard.ownerForTuple(tuple: (x, i))
+                if (loopSquareStatus == player && emptiesOneSide == 0) {
+                    consecutivePieces += 1
+                } else if (emptiesOneSide < target / 2) {
+                    if (loopSquareStatus == .NoOne) {
+                        emptiesOneSide += 1
+                    } else if (loopSquareStatus == player) {
+                        nearbyPieces += 1
+                    } else {
+                        break
+                    }
                 } else {
                     break
                 }
-            } else {
-                break
             }
         }
         
-        for i in y + 1...gameBoard.height - 1 {
-            loopSquareStatus = gameBoard.ownerForTuple(tuple: (x, i))
-            if (loopSquareStatus == player && emptiesOtherSide == 0) {
-                consecutivePieces += 1
-            } else if (emptiesOtherSide < target / 2) {
-                if (loopSquareStatus == .NoOne) {
-                    emptiesOtherSide += 1
-                } else if (loopSquareStatus == player) {
-                    nearbyPieces += 1
+        if (y < gameBoard.height - 1) {
+            for i in y + 1...gameBoard.height - 1 {
+                loopSquareStatus = gameBoard.ownerForTuple(tuple: (x, i))
+                if (loopSquareStatus == player && emptiesOtherSide == 0) {
+                    consecutivePieces += 1
+                } else if (emptiesOtherSide < target / 2) {
+                    if (loopSquareStatus == .NoOne) {
+                        emptiesOtherSide += 1
+                    } else if (loopSquareStatus == player) {
+                        nearbyPieces += 1
+                    } else {
+                        break
+                    }
                 } else {
                     break
                 }
-            } else {
-                break
             }
         }
         
@@ -175,50 +227,54 @@ class GameEngine: NSObject {
         resetVars()
         
         //check diagonally both ways
-        var j = y + 1
-        for i in x + 1...gameBoard.width - 1 {
-            if (j >= gameBoard.height) {
-                break
-            }
-            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
-            if (loopSquareStatus == player && emptiesOneSide == 0) {
-                consecutivePieces += 1
-            } else if (emptiesOneSide < target / 2) {
-                if (loopSquareStatus == .NoOne) {
-                    emptiesOneSide += 1
-                } else if (loopSquareStatus == player) {
-                    nearbyPieces += 1
+        if (x < gameBoard.width - 1) {
+            var j = y + 1
+            for i in x + 1...gameBoard.width - 1 {
+                if (j >= gameBoard.height - 1) {
+                    break
+                }
+                loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
+                if (loopSquareStatus == player && emptiesOneSide == 0) {
+                    consecutivePieces += 1
+                } else if (emptiesOneSide < target / 2) {
+                    if (loopSquareStatus == .NoOne) {
+                        emptiesOneSide += 1
+                    } else if (loopSquareStatus == player) {
+                        nearbyPieces += 1
+                    } else {
+                        break
+                    }
                 } else {
                     break
                 }
-            } else {
-                break
+                
+                j += 1
             }
-            
-            j += 1
         }
         
-        j = y - 1
-        for i in (0...x - 1).reversed() {
-            if (j < 0) {
-                break
-            }
-            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
-            if (loopSquareStatus == player && emptiesOtherSide == 0) {
-                consecutivePieces += 1
-            } else if (emptiesOtherSide < target / 2) {
-                if (loopSquareStatus == .NoOne) {
-                    emptiesOtherSide += 1
-                } else if (loopSquareStatus == player) {
-                    nearbyPieces += 1
+        if (x > 0) {
+            var j = y - 1
+            for i in (0...max(0, x - 1)).reversed() {
+                if (j < 0) {
+                    break
+                }
+                loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
+                if (loopSquareStatus == player && emptiesOtherSide == 0) {
+                    consecutivePieces += 1
+                } else if (emptiesOtherSide < target / 2) {
+                    if (loopSquareStatus == .NoOne) {
+                        emptiesOtherSide += 1
+                    } else if (loopSquareStatus == player) {
+                        nearbyPieces += 1
+                    } else {
+                        break
+                    }
                 } else {
                     break
                 }
-            } else {
-                break
+                
+                j -= 1
             }
-            
-            j -= 1
         }
         
         if (emptiesOneSide + emptiesOtherSide + nearbyPieces + consecutivePieces >= target) {
@@ -227,48 +283,52 @@ class GameEngine: NSObject {
         
         resetVars()
         
-        j = y + 1
-        for i in (0...x - 1).reversed() {
-            if (j >= gameBoard.height) {
-                break
-            }
-            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
-            if (loopSquareStatus == player && emptiesOneSide == 0) {
-                consecutivePieces += 1
-            } else if (emptiesOneSide < target / 2) {
-                if (loopSquareStatus == .NoOne) {
-                    emptiesOneSide += 1
-                } else if (loopSquareStatus == player) {
-                    nearbyPieces += 1
+        if (x > 0) {
+            var j = y + 1
+            for i in (0...x - 1).reversed() {
+                if (j >= gameBoard.height - 1) {
+                    break
+                }
+                loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
+                if (loopSquareStatus == player && emptiesOneSide == 0) {
+                    consecutivePieces += 1
+                } else if (emptiesOneSide < target / 2) {
+                    if (loopSquareStatus == .NoOne) {
+                        emptiesOneSide += 1
+                    } else if (loopSquareStatus == player) {
+                        nearbyPieces += 1
+                    } else {
+                        break
+                    }
                 } else {
                     break
                 }
-            } else {
-                break
+                j += 1
             }
-            j += 1
         }
         
-        j = y - 1
-        for i in x + 1...gameBoard.width {
-            if (j < 0) {
-                break
-            }
-            loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
-            if (loopSquareStatus == player && emptiesOtherSide == 0) {
-                consecutivePieces += 1
-            } else if (emptiesOtherSide < target / 2) {
-                if (loopSquareStatus == .NoOne) {
-                    emptiesOtherSide += 1
-                } else if (loopSquareStatus == player) {
-                    nearbyPieces += 1
+        if (x < gameBoard.width - 1) {
+            var j = y - 1
+            for i in x + 1...gameBoard.width - 1 {
+                if (j < 0) {
+                    break
+                }
+                loopSquareStatus = gameBoard.ownerForTuple(tuple: (i, j))
+                if (loopSquareStatus == player && emptiesOtherSide == 0) {
+                    consecutivePieces += 1
+                } else if (emptiesOtherSide < target / 2) {
+                    if (loopSquareStatus == .NoOne) {
+                        emptiesOtherSide += 1
+                    } else if (loopSquareStatus == player) {
+                        nearbyPieces += 1
+                    } else {
+                        break
+                    }
                 } else {
                     break
                 }
-            } else {
-                break
+                j -= 1
             }
-            j -= 1
         }
         
         if (emptiesOneSide + emptiesOtherSide + nearbyPieces + consecutivePieces >= target) {
@@ -306,27 +366,27 @@ class GameEngine: NSObject {
         var bestScore = -1.0
         var bestScoringSquare: (Int, Int)?
         
-        let boardSize = self.target
+        let width = self.gameBoard.width
+        let height = self.gameBoard.height
         if (self.friendlyStonesPlaced == 0) {
             /* Case 0 */
-            let middle = boardSize / 2
-            let middleSquare1Owner = gameBoard.ownerForTuple(tuple: (middle, middle))
+            let middleSquare1Owner = gameBoard.ownerForTuple(tuple: (width / 2, height / 2))
             if (middleSquare1Owner == Player.NoOne) {
-                ret = (middle, middle)
+                ret = (width / 2, height / 2)
             } else {
-                if (boardSize == 3) {
+                if (width == 3 && height == 3) {
                     //don't auto-lose in tic-tac-toe :)
                     ret = (0, 0)
                 } else {
-                    ret = (middle - 1, middle)
+                    ret = (width / 2, height / 2)
                 }
             }
         } else {
             //prune outside squares
             let minRow = max(0, self.lowestRowWithStone - 2)
-            let maxRow = min(boardSize - 1, self.highestRowWithStone + 2)
+            let maxRow = min(width - 1, self.highestRowWithStone + 2)
             let minCol = max(0, self.lowestColumnWithStone - 2)
-            let maxCol = min(boardSize - 1, self.highestColumnWithStone + 2)
+            let maxCol = min(height - 1, self.highestColumnWithStone + 2)
             
             var finished = false
             
@@ -415,7 +475,6 @@ class GameEngine: NSObject {
         if (ret == nil) {
             print("Game is over, probably!")
         } else {
-            self.UpdateSearchBoundsForPlayedSquare(tuple: ret!)
             self.friendlyStonesPlaced += 1
         }
         

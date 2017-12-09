@@ -8,7 +8,20 @@
 
 import UIKit
 
-class GameBoardViewController: UICollectionViewController {
+class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
+    func AIMovedToSquare(tuple: (Int, Int)) {
+        if let cell = collectionView?.cellForItem(at: IndexPath(row: tuple.1, section: tuple.0)) as? BoardSquareView {
+            cell.changeToSquareType(type: .AI, instant: false)
+            print("should update?")
+        } else {
+            print("shouldn't update...")
+        }
+    }
+    
+    func gameEnded() {
+        print("woo game is over, winner is \(self.gameEngine.winner)")
+    }
+    
     
     let reuseIdentifier = "customCell"
     var gridWidth: Int
@@ -24,6 +37,7 @@ class GameBoardViewController: UICollectionViewController {
         self.gameBoard = GameBoard(width: gridWidth, height: gridHeight)
         self.gameEngine = GameEngine(gameBoard: self.gameBoard, target: self.target)
         super.init(nibName: String(describing: GameBoardViewController.self), bundle: nil)
+        self.gameEngine.gameUpdateDelegate = self
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -68,8 +82,7 @@ class GameBoardViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if (self.gameEngine.playerCanMove()) {
-            print("should work")
-            self.gameEngine.makeMoveToSquare(tuple: (indexPath.row, indexPath.section))
+            self.gameEngine.makePlayerMoveToSquare(tuple: (indexPath.section, indexPath.row))
         
             if let cell = collectionView.cellForItem(at: indexPath) as? BoardSquareView {
                 cell.changeToSquareType(type: .Human, instant: false)
