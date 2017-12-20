@@ -57,7 +57,6 @@ class GameEngine: NSObject {
             self.winner = .NoOne
             self.gameUpdateDelegate?.gameEnded()
         } else {
-            self.checkForGameOver()
             self.advancePlayer()
             
             //fix
@@ -76,7 +75,6 @@ class GameEngine: NSObject {
                     self.winner = .NoOne
                     self.gameUpdateDelegate?.gameEnded()
                 } else {
-                    self.checkForGameOver()
                     self.advancePlayer()
                 }
             }
@@ -85,14 +83,6 @@ class GameEngine: NSObject {
     
     private func MoveWinsForSquareAndPlayer(tuple: (Int, Int), player: GameEngine.Player) -> Bool {
         return self.ScoreForMoveToSquareWithStatus(tuple: tuple, player: player).MoveWins();
-    }
-    
-    private func checkForGameOver() {
-        //to fill in
-        print("game is over!")
-        if (self.numberOfMoves == self.gameBoard.width * self.gameBoard.height) {
-            print("tie")
-        }
     }
     
     private func advancePlayer() {

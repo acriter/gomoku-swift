@@ -63,7 +63,6 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.register(BoardSquareView.self, forCellWithReuseIdentifier: reuseIdentifier)
-        //collectionView?.register(UINib.init(nibName: String(describing: BoardSquareView.self), bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
     }
 
     override func didReceiveMemoryWarning() {

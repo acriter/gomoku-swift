@@ -34,7 +34,7 @@ class MainScreenViewController: UIViewController {
     var gameBoardVC : GameBoardViewController? = nil
     
     @IBAction func startGame() {
-        self.toggleSidebar(hide: true, instant: false, completion: nil)
+        self.didTapHamburgerButton(sender: nil)
         
         if self.gameBoardVC != nil {
             self.gameBoardVC?.willMove(toParentViewController: nil)
@@ -48,12 +48,11 @@ class MainScreenViewController: UIViewController {
     
     private func setUpGameBoard() {
         let gameBoardViewController = GameBoardViewController(gridWidth: gridWidth, gridHeight: gridHeight, target: target)
-        addChildViewController(gameBoardViewController)
-        gameBoardViewController.didMove(toParentViewController: self)
-        
-        gameBoardViewController.view.frame = self.view.bounds
-        self.view.insertSubview(gameBoardViewController.view, belowSubview: self.sidebarView)
         self.gameBoardVC = gameBoardViewController
+        addChildViewController(gameBoardViewController)
+        gameBoardViewController.willMove(toParentViewController: self)
+        gameBoardViewController.view.frame = CGRect(origin: CGPoint(x: 0, y: (self.navigationController?.navigationBar.frame.height ?? 0) + UIApplication.shared.statusBarFrame.height), size: self.view.frame.size)
+        self.view.insertSubview(gameBoardViewController.view, belowSubview: self.sidebarView)
     }
     
     // MARK: - view functions
@@ -63,11 +62,13 @@ class MainScreenViewController: UIViewController {
         let leftBarButtonImg = #imageLiteral(resourceName: "icons8-menu-50")
         let leftBarButtonItem = UIBarButtonItem(image: leftBarButtonImg, style: .plain, target: self, action: #selector(didTapHamburgerButton(sender:)))
         navigationItem.leftBarButtonItem = leftBarButtonItem
-        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         toggleSidebar(hide: true, instant: true, completion: nil)
-        
-        setUpGameBoard()
         refreshSidebarButtons()
+        setUpGameBoard()
     }
     
     override func didReceiveMemoryWarning() {
@@ -88,7 +89,7 @@ class MainScreenViewController: UIViewController {
         }, completion: completion)
     }
     
-    @objc private func didTapHamburgerButton(sender: UIBarButtonItem) {
+    @objc private func didTapHamburgerButton(sender: UIBarButtonItem?) {
         toggleSidebar(hide: self.sidebarIsShowing, instant: false, completion: nil)
         self.sidebarIsShowing = !self.sidebarIsShowing
     }
