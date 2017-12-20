@@ -19,6 +19,7 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
     }
     
     func gameEnded() {
+        self.toggleOverlayView(hide: false, delay: 0.4)
         print("woo game is over, winner is \(self.gameEngine.winner)")
     }
     
@@ -29,6 +30,9 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
     var target: Int
     var gameBoard: GameBoard
     var gameEngine: GameEngine
+    
+    var overlayViewIsShowing = false
+    var overlayView : UIView? = nil
     
     init(gridWidth: Int, gridHeight: Int, target: Int) {
         self.gridWidth = gridWidth
@@ -60,9 +64,29 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
         super.init(coder: aDecoder)
     }
     
+    func toggleOverlayView(hide: Bool, delay: Double) {
+        let targetOpacity = hide ? 0 : 0.6
+        UIView.animate(withDuration: 1.2,
+                       delay: delay,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0.5,
+                       options: .curveEaseInOut, animations: {
+                        self.overlayView?.backgroundColor = UIColor.black.withAlphaComponent(CGFloat(targetOpacity))
+        }, completion: nil)
+        self.overlayView?.isUserInteractionEnabled = hide
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.register(BoardSquareView.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        if (self.overlayView == nil) {
+            let anOverlayView = UIView(frame: self.view.bounds)
+            anOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0)
+            anOverlayView.isUserInteractionEnabled = false
+            self.view.insertSubview(anOverlayView, aboveSubview: self.collectionView!)
+            self.overlayView = anOverlayView
+        }
     }
 
     override func didReceiveMemoryWarning() {

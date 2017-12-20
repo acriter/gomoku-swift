@@ -67,7 +67,7 @@ class MainScreenViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         toggleSidebar(hide: !self.sidebarIsShowing, instant: true, completion: nil)
-        refreshSidebarButtons()
+        refreshSidebarButtons()        
         setUpGameBoard()
     }
     
@@ -87,6 +87,8 @@ class MainScreenViewController: UIViewController {
                        options: .curveEaseInOut, animations: {
                         self.sidebarView.frame.origin = targetPosition
         }, completion: completion)
+        
+        self.gameBoardVC?.toggleOverlayView(hide: hide, delay: 0)
     }
     
     @objc private func didTapHamburgerButton(sender: UIBarButtonItem?) {
