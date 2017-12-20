@@ -19,8 +19,25 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
     }
     
     func gameEnded() {
-        self.toggleOverlayView(hide: false, delay: 0.4)
-        print("woo game is over, winner is \(self.gameEngine.winner)")
+        self.toggleOverlayView(hide: false, delay: 0.4, completion: { finished in
+            var winnerDescription = ""
+            switch self.gameEngine.winner! {
+                case .NoOne:
+                winnerDescription = "It was a tie!"
+                case .AI:
+                winnerDescription = "The AI won!"
+                case .Human:
+                winnerDescription = "You won!"
+            }
+            self.overlayViewLabel?.text = "Game Over! \(winnerDescription)"
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: 0.9,
+                           initialSpringVelocity: 0.5,
+                           options: .curveEaseIn, animations: {
+                            self.overlayViewLabel?.textColor = UIColor.white.withAlphaComponent(1)
+            }, completion: nil)
+        })
     }
     
     
@@ -33,6 +50,7 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
     
     var overlayViewIsShowing = false
     var overlayView : UIView? = nil
+    var overlayViewLabel : UILabel? = nil
     
     init(gridWidth: Int, gridHeight: Int, target: Int) {
         self.gridWidth = gridWidth
@@ -64,21 +82,21 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
         super.init(coder: aDecoder)
     }
     
-    func toggleOverlayView(hide: Bool, delay: Double) {
+    func toggleOverlayView(hide: Bool, delay: Double, completion: ((Bool) -> Void)?) {
         let targetOpacity = hide ? 0 : 0.6
         UIView.animate(withDuration: 1.2,
                        delay: delay,
-                       usingSpringWithDamping: 0.8,
+                       usingSpringWithDamping: 0.9,
                        initialSpringVelocity: 0.5,
-                       options: .curveEaseInOut, animations: {
+                       options: .curveEaseIn, animations: {
                         self.overlayView?.backgroundColor = UIColor.black.withAlphaComponent(CGFloat(targetOpacity))
-        }, completion: nil)
-        self.overlayView?.isUserInteractionEnabled = hide
+        }, completion: completion)
+        self.overlayView?.isUserInteractionEnabled = !hide
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.register(BoardSquareView.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView?.register(BoardSquareView.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         if (self.overlayView == nil) {
             let anOverlayView = UIView(frame: self.view.bounds)
@@ -86,6 +104,15 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
             anOverlayView.isUserInteractionEnabled = false
             self.view.insertSubview(anOverlayView, aboveSubview: self.collectionView!)
             self.overlayView = anOverlayView
+            
+            let anOverlayViewLabel = UILabel(frame: CGRect(origin: CGPoint(x: 0, y: 100), size: CGSize(width: self.collectionView!.frame.width, height: 50)))
+            anOverlayViewLabel.text = "this is some text"
+            anOverlayViewLabel.font = UIFont.boldSystemFont(ofSize: 24)
+            anOverlayViewLabel.textColor = UIColor.clear
+            anOverlayViewLabel.textAlignment = NSTextAlignment.center
+            anOverlayViewLabel.isUserInteractionEnabled = false
+            self.overlayView?.addSubview(anOverlayViewLabel)
+            self.overlayViewLabel = anOverlayViewLabel
         }
     }
 

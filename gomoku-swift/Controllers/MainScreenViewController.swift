@@ -88,7 +88,7 @@ class MainScreenViewController: UIViewController {
                         self.sidebarView.frame.origin = targetPosition
         }, completion: completion)
         
-        self.gameBoardVC?.toggleOverlayView(hide: hide, delay: 0)
+        self.gameBoardVC?.toggleOverlayView(hide: hide, delay: 0, completion: nil)
     }
     
     @objc private func didTapHamburgerButton(sender: UIBarButtonItem?) {
