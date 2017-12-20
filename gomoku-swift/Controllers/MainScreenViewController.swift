@@ -28,8 +28,8 @@ class MainScreenViewController: UIViewController {
     let gridSizeMax = 20
     let targetMin = 3
     var sidebarIsShowing = false
-    var gridWidth = 9
-    var gridHeight = 9
+    var gridWidth = 8
+    var gridHeight = 8
     var target = 5
     var gameBoardVC : GameBoardViewController? = nil
     
@@ -66,7 +66,7 @@ class MainScreenViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        toggleSidebar(hide: true, instant: true, completion: nil)
+        toggleSidebar(hide: !self.sidebarIsShowing, instant: true, completion: nil)
         refreshSidebarButtons()
         setUpGameBoard()
     }
