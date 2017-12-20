@@ -12,7 +12,6 @@ import UIKit
 class BoardSquareView: UICollectionViewCell {
     
     var colorView: UIView?
-    //var label: UILabel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,9 +25,6 @@ class BoardSquareView: UICollectionViewCell {
     
     private func commonInit() {
         self.setUpCell(owner: .NoOne)
-        //Bundle.main.loadNibNamed(String(describing:BoardSquareView.self), owner: self, options: nil)
-        //self.contentView.frame = self.bounds
-        //self.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
     public func setUpCell(owner: GameEngine.Player) {
@@ -40,10 +36,6 @@ class BoardSquareView: UICollectionViewCell {
         let v = UIView(frame: self.bounds)
         self.contentView.addSubview(v)
         self.colorView = v
-        
-        //let aLabel = UILabel(frame: self.bounds)
-        //self.contentView.addSubview(aLabel)
-        //self.label = aLabel
     }
     
     public func changeToSquareType(type: GameEngine.Player, instant: Bool) {

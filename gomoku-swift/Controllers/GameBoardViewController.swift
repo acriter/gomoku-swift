@@ -106,8 +106,6 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BoardSquareView
         
         let owner: GameEngine.Player = gameBoard.ownerForIndexPath(path: indexPath)
-        //cell.label?.font = UIFont.boldSystemFont(ofSize: 10.0)
-        //cell.label?.text = "\(indexPath.section), \(indexPath.row)"
         cell.setUpCell(owner: owner)
         return cell
     }
