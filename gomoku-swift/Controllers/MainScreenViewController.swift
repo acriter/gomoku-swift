@@ -27,7 +27,7 @@ class MainScreenViewController: UIViewController {
     let gridSizeMin = 3
     let gridSizeMax = 20
     let targetMin = 3
-    var sidebarIsShowing = false
+    var sidebarIsShowing = true
     var gridWidth = 8
     var gridHeight = 8
     var target = 5

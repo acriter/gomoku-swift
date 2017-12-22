@@ -29,7 +29,7 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
                 case .Human:
                 winnerDescription = "You won!"
             }
-            self.overlayViewLabel?.text = "Game Over! \(winnerDescription)"
+            self.overlayViewLabel?.attributedText = self.attributedTextForLabel(string: "Game over! \(winnerDescription)")
             UIView.animate(withDuration: 0.5,
                            delay: 0,
                            usingSpringWithDamping: 0.9,
@@ -83,6 +83,10 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
     }
     
     func toggleOverlayView(hide: Bool, delay: Double, completion: ((Bool) -> Void)?) {
+        //make sure the overlay stays up if the game is over
+        if (gameEngine.winner != nil && hide) {
+            return
+        }
         let targetOpacity = hide ? 0 : 0.6
         UIView.animate(withDuration: 1.2,
                        delay: delay,
@@ -92,6 +96,16 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
                         self.overlayView?.backgroundColor = UIColor.black.withAlphaComponent(CGFloat(targetOpacity))
         }, completion: completion)
         self.overlayView?.isUserInteractionEnabled = !hide
+    }
+
+    private func attributedTextForLabel(string: String) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: string,
+                                  attributes: [
+                NSAttributedStringKey.strokeColor : UIColor.black,
+                NSAttributedStringKey.foregroundColor : UIColor.white,
+                NSAttributedStringKey.strokeWidth : -4,
+                NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 28)
+            ])
     }
     
     override func viewDidLoad() {
@@ -106,9 +120,7 @@ class GameBoardViewController: UICollectionViewController, GameUpdateDelegate {
             self.overlayView = anOverlayView
             
             let anOverlayViewLabel = UILabel(frame: CGRect(origin: CGPoint(x: 0, y: 100), size: CGSize(width: self.collectionView!.frame.width, height: 50)))
-            anOverlayViewLabel.text = "this is some text"
-            anOverlayViewLabel.font = UIFont.boldSystemFont(ofSize: 24)
-            anOverlayViewLabel.textColor = UIColor.clear
+            anOverlayViewLabel.text = ""
             anOverlayViewLabel.textAlignment = NSTextAlignment.center
             anOverlayViewLabel.isUserInteractionEnabled = false
             self.overlayView?.addSubview(anOverlayViewLabel)

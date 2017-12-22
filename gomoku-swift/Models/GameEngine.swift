@@ -59,7 +59,6 @@ class GameEngine: NSObject {
         } else {
             self.advancePlayer()
             
-            //fix
             if (self.currentPlayer == .AI) {
                 //make move
                 let bestMove = self.BestMove()
